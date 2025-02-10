@@ -1,0 +1,91 @@
+Este projeto é uma plataforma de leitura e escrita de livros, permitindo que os usuários criem, publiquem, leiam e editem livros de maneira simples e eficiente. A aplicação possui um backend desenvolvido com Node.js e MongoDB, permitindo aos usuários interagir com livros, autores e suas próprias publicações.
+
+Funcionalidades
+Cadastro de Livros: Usuários podem adicionar novos livros, incluindo título, descrição, autor e imagem de capa.
+Listagem de Livros: Exibição de todos os livros cadastrados.
+Busca por Livro: Busca de livros por ID ou por usuário.
+Edição de Livros: Possibilidade de editar informações de livros publicados.
+Exclusão de Livros: Usuários podem excluir livros que publicaram.
+Autor e Nacionalidade: O autor é associado ao livro e possui informações sobre sua nacionalidade.
+Estrutura do Banco de Dados
+Autor
+nome: Nome do autor (obrigatório).
+nacionalidade: Nacionalidade do autor (opcional).
+Livro
+titulo: Título do livro (obrigatório).
+descricao: Descrição do livro (obrigatório).
+editora: Editora do livro (opcional).
+image: URL da imagem de capa (opcional).
+userId: ID do usuário que publicou o livro.
+autor: Autor do livro, que segue o autorSchema.
+Como Rodar o Projeto
+1. Clonar o repositório
+bash
+Copiar
+Editar
+git clone <URL_DO_REPOSITORIO>
+cd <NOME_DA_PASTA>
+2. Instalar dependências
+bash
+Copiar
+Editar
+npm install
+3. Configurar o MongoDB
+Crie um arquivo .env na raiz do projeto e adicione a URL de conexão com o MongoDB:
+
+bash
+Copiar
+Editar
+MONGO_URI=mongodb://<USUARIO>:<SENHA>@<URL_DO_MONGO>
+4. Rodar o servidor
+bash
+Copiar
+Editar
+npm start
+O servidor estará disponível em: http://localhost:6000 (ou conforme o valor configurado na variável PORT).
+
+Endpoints da API
+POST /livros: Criar um novo livro
+Cria um livro com informações fornecidas no corpo da requisição.
+
+Exemplo de corpo:
+
+json
+Copiar
+Editar
+{
+  "titulo": "O Senhor dos Anéis",
+  "descricao": "Uma épica jornada pela Terra-Média.",
+  "editora": "HarperCollins",
+  "image": "url-da-imagem.jpg",
+  "userId": 1,
+  "autor": {
+    "nome": "J.R.R. Tolkien",
+    "nacionalidade": "Inglês"
+  }
+}
+GET /livros: Listar todos os livros
+Retorna todos os livros cadastrados.
+
+GET /livros/user/:userid: Listar livros de um usuário específico
+Retorna todos os livros cadastrados por um usuário, utilizando o userId.
+
+GET /livros/:id: Buscar um livro pelo ID
+Retorna as informações de um livro específico usando seu id.
+
+PUT /livros/:id: Atualizar um livro
+Atualiza as informações de um livro já existente.
+
+DELETE /livros/:id/:livroid: Deletar um livro
+Deleta um livro específico, validando que o userId corresponde ao dono do livro.
+
+Tecnologia Utilizada
+Node.js: Ambiente de execução para JavaScript no servidor.
+Express: Framework minimalista para Node.js que facilita a criação da API.
+MongoDB: Banco de dados NoSQL utilizado para armazenar livros, autores e usuários.
+Mongoose: ODM (Object Data Modeling) para MongoDB, usado para definir os esquemas e interagir com o banco de dados.
+dotenv: Para carregar variáveis de ambiente do arquivo .env.
+CORS: Permite solicitações de origens cruzadas (necessário para permitir que o frontend se comunique com a API).
+Body-Parser: Middleware para parsing do corpo da requisição.
+Licença
+Este projeto é de uso livre, mas não é permitido o uso comercial sem autorização prévia.
